@@ -1,0 +1,7 @@
+C:\Users\alexl\Desktop\Unity code project\Storage\Storage\bin\Debug\Storage.exe.config
+C:\Users\alexl\Desktop\Unity code project\Storage\Storage\bin\Debug\Storage.exe
+C:\Users\alexl\Desktop\Unity code project\Storage\Storage\bin\Debug\Storage.pdb
+C:\Users\alexl\Desktop\Unity code project\Storage\Storage\obj\Debug\Storage.csprojAssemblyReference.cache
+C:\Users\alexl\Desktop\Unity code project\Storage\Storage\obj\Debug\Storage.csproj.CoreCompileInputs.cache
+C:\Users\alexl\Desktop\Unity code project\Storage\Storage\obj\Debug\Storage.exe
+C:\Users\alexl\Desktop\Unity code project\Storage\Storage\obj\Debug\Storage.pdb
