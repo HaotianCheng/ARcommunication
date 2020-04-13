@@ -5,16 +5,14 @@ using UnityEngine.UI;
 
 public class Hello : MonoBehaviour
 {
-    public Text h;
+    public GameObject pointer;
+    public GameObject t;
 
-    public void PrintInConsole()
+    public void Update()
     {
-        Debug.Log(Hashing(h.text));
-    }
-
-    public string Hashing(string plainText)
-    {
-        return plainText.ToUpper();
+        Debug.Log("update");
+        pointer.transform.rotation.SetLookRotation(t.transform.forward, Vector3.up);
+        // pointer.transform.rotation = Quaternion.LookRotation(t.transform.forward, Vector3.up);
     }
 
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.Experimental.XR;
 using UnityEngine.XR.ARSubsystems;
+using UnityEngine.UI;
 
 public class ObjectSpawner : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class ObjectSpawner : MonoBehaviour
     private ARSessionOrigin arOrigin;
     private Pose pose;
     private bool isHit;
+
+    public Text log;
+    public Text log2;
     
 
     // Start is called before the first frame update
@@ -24,8 +28,9 @@ public class ObjectSpawner : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
+
         UpdatePose();
         UpdatePointer();
 
@@ -44,7 +49,8 @@ public class ObjectSpawner : MonoBehaviour
             pointer.transform.position = pose.position;
 
             Vector3 cameraForward = Camera.current.transform.forward;
-            pointer.transform.rotation.SetLookRotation(new Vector3(cameraForward.x, 0, cameraForward.z));
+            log.text = cameraForward.ToString();
+            pointer.transform.rotation = Quaternion.LookRotation(new Vector3(cameraForward.x, 0, cameraForward.z), Vector3.up);
         }
         else
         {
@@ -54,16 +60,39 @@ public class ObjectSpawner : MonoBehaviour
 
     public void UpdatePose()
     {
+        //Debug.Log("PoseUpdate: " + Camera.current != null + " " + isHit);
+        if (Camera.current != null)
+        {
+            var screenCenter = Camera.current.ViewportToScreenPoint(new Vector3(0.5f, 0.5f));
+            var hits = new List<ARRaycastHit>();
+            raycastManager.Raycast(screenCenter, hits, TrackableType.Planes);
+            //Debug.Log("PoseHitCount: " + hits.Count.ToString());           
+            isHit = hits.Count > 0;
+            if (isHit)
+            {
+                pose = hits[0].pose;
+                //Debug.Log("Pose: " + pose.ToString());
+            }
+        }
+        
+
+    }
+
+    public void OnLogButton()
+    {
         var screenCenter = Camera.current.ViewportToScreenPoint(new Vector3(0.5f, 0.5f));
         var hits = new List<ARRaycastHit>();
-        raycastManager.Raycast(screenCenter, hits,  TrackableType.Planes);
-
+        bool main = Camera.main != null;
+        bool cur = Camera.current != null;
+        Debug.Log(main + " " + cur);
+        Debug.Log("A: " + raycastManager.Raycast(screenCenter, hits, TrackableType.Planes) + " HIT " + hits.Count + " " + hits[0].pose);
+        Debug.Log("B: " + raycastManager.Raycast(screenCenter, hits, TrackableType.PlaneWithinPolygon) + " HIT " + hits.Count + " " + hits[0].pose);
         isHit = hits.Count > 0;
         if (isHit)
         {
+            log2.text = hits[0].pose.position.ToString();
             pose = hits[0].pose;
         }
-
     }
 
 }

@@ -122,11 +122,17 @@
     <Reference Include="Unity.XR.ARCore">
       <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/Unity.XR.ARCore.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.SpriteShape.Editor">
+      <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/Unity.2D.SpriteShape.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.XR.ARFoundation.Editor">
       <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/Unity.XR.ARFoundation.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Path.Editor">
+      <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/Unity.2D.Path.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.ARFoundation">
       <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/Unity.XR.ARFoundation.dll</HintPath>
@@ -149,27 +155,6 @@
     <Reference Include="Unity.Rider.Editor">
       <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.SpatialTracking">
-      <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.SpatialTracking">
-      <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.XR.LegacyInputHelpers">
-      <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.SpriteShape.Editor">
-      <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/Unity.2D.SpriteShape.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Path.Editor">
-      <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/Unity.2D.Path.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Mathematics">
       <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
     </Reference>
@@ -185,14 +170,29 @@
     <Reference Include="Unity.2D.SpriteShape.Runtime">
       <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/Unity.2D.SpriteShape.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.SpatialTracking">
+      <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpatialTracking">
+      <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Mathematics.Editor">
       <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Common.Editor">
       <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/Unity.2D.Common.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.XR.LegacyInputHelpers">
+      <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.InternalAPIEditorBridge.001">
       <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>C:/Galaxy/GMStudio/Workshop/AR Object On Hand/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Galaxy/Tools/Unityhub/unity location/2019.3.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
