@@ -10,20 +10,27 @@ public class VisualHandle : MonoBehaviour
     public GameObject palmCenter;
     public Text log;
 
+    public GestureInfo gestureInfo;
+    public TrackingInfo trackingInfo; 
+    public Warning warning;
+    public Session session;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        gestureInfo = ManomotionManager.Instance.Hand_infos[0].hand_info.gesture_info;
+        trackingInfo = ManomotionManager.Instance.Hand_infos[0].hand_info.tracking_info;
+        warning = ManomotionManager.Instance.Hand_infos[0].hand_info.warning;
+        session = ManomotionManager.Instance.Manomotion_Session;
     }
 
     // Update is called once per frame
     void Update()
     {
-        GestureInfo gestureInfo = ManomotionManager.Instance.Hand_infos[0].hand_info.gesture_info;
-        TrackingInfo trackingInfo = ManomotionManager.Instance.Hand_infos[0].hand_info.tracking_info;
-        Warning warning = ManomotionManager.Instance.Hand_infos[0].hand_info.warning;
-        Session session = ManomotionManager.Instance.Manomotion_Session;
+        gestureInfo = ManomotionManager.Instance.Hand_infos[0].hand_info.gesture_info;
+        trackingInfo = ManomotionManager.Instance.Hand_infos[0].hand_info.tracking_info;
+        warning = ManomotionManager.Instance.Hand_infos[0].hand_info.warning;
+        session = ManomotionManager.Instance.Manomotion_Session;
 
         visualDisplay.text = "";
 

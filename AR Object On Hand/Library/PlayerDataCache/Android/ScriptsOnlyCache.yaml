@@ -24,9 +24,7 @@ ScriptsOnlyBuild:
     - UnityEngine.XR.ARFoundation.ARCameraBackground
     - UnityEngine.XR.ARFoundation.ARCameraManager
     - UnityEngine.XR.ARFoundation.ARInputManager
-    - UnityEngine.XR.ARFoundation.ARPlane
     - UnityEngine.XR.ARFoundation.ARPlaneManager
-    - UnityEngine.XR.ARFoundation.ARPlaneMeshVisualizer
     - UnityEngine.XR.ARFoundation.ARRaycastManager
     - UnityEngine.XR.ARFoundation.ARSession
     - UnityEngine.XR.ARFoundation.ARSessionOrigin
@@ -49,6 +47,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
     - UnityEngine.UI.InputField
+    - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
   sceneClasses:
     Assets/Scenes/Game.unity:
@@ -71,8 +70,6 @@ ScriptsOnlyBuild:
     - Class: 48
       Script: {instanceID: 0}
     - Class: 49
-      Script: {instanceID: 0}
-    - Class: 64
       Script: {instanceID: 0}
     - Class: 74
       Script: {instanceID: 0}
@@ -113,8 +110,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12036}
     - Class: 114
-      Script: {instanceID: 12084}
-    - Class: 114
       Script: {instanceID: 12166}
     - Class: 114
       Script: {instanceID: 12220}
@@ -122,8 +117,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 12270}
     - Class: 114
       Script: {instanceID: 12422}
-    - Class: 114
-      Script: {instanceID: 12446}
     - Class: 114
       Script: {instanceID: 12792}
     - Class: 114
@@ -162,9 +155,9 @@ ScriptsOnlyBuild:
       Script: {instanceID: 14236}
     - Class: 114
       Script: {instanceID: 14238}
+    - Class: 114
+      Script: {instanceID: 14272}
     - Class: 115
-      Script: {instanceID: 0}
-    - Class: 120
       Script: {instanceID: 0}
     - Class: 128
       Script: {instanceID: 0}
@@ -343,7 +336,7 @@ ScriptsOnlyBuild:
     className: SpriteShapeController
   - hash:
       serializedVersion: 2
-      Hash: 974076ce1d3a01f409d76b1c2ee06c99
+      Hash: 9eb575eb1a8ed2b22145fde4b3477c52
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: VisualHandle
@@ -445,7 +438,7 @@ ScriptsOnlyBuild:
     className: AspectRatioFitter
   - hash:
       serializedVersion: 2
-      Hash: 30c3c3c743d64a197f56a1ff0bc27370
+      Hash: 3331c5abc9072df0dfadfcf357e1bbdb
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ObjectSpawner
