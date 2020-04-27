@@ -2,65 +2,63 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Firebase;
+using Firebase.Database;
+using Firebase.Unity.Editor;
 
 
 public class Login : MonoBehaviour
 {
-    public InputField playerName;
-    public InputField password;
+    public InputField UserName;
+    public InputField Password;
     public Storage storage;
     public GameObject roomPanel;
+    public GameObject lobbyPanel;
+    public GameObject loginPanel;
+    public Text log;
 
-    // Start is called before the first frame update
-    void Start()
+    public async void OnCreateButton()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown("t"))
+        int result = await storage.CreateAccount(UserName.text, Password.text);
+        if (result == 0)
         {
-            foreach (string key in storage.dictionary.Keys)
-            {
-                Debug.Log(key + ": " + storage.dictionary[key]);
-            }
-        }
-    }
-
-    public void OnCreateButton()
-    {
-        int result = storage.createAccount(playerName.text, password.text);
-        if (result == -1)
-        {
+            log.text = "Username is taken, please choose another one";
             Debug.LogWarning("Username is taken, please choose another one");
         }
         else
         {
             Debug.Log("Account created");
+            SetScreen(lobbyPanel);
         }
-
-
     }
 
-    public void OnSignInButton()
+    public async void OnSignInButton()
     {
-        int result = storage.SignIn(playerName.text, password.text);
-        if (result == 0)
+        int result = await storage.SignIn(UserName.text, Password.text);
+        if (result == -1)
         {
+            log.text = "Account not exist";
             Debug.LogWarning("Account not exist");
         }
-        else if (result == -1)
+        else if (result == 0)
         {
+            log.text = "Incorrect password";
             Debug.LogWarning("Incorrect password");
         }
         else
         {
+            log.text = "Login Successful";
             Debug.Log("Login Successful");
-            roomPanel.SetActive(true);
-            gameObject.SetActive(false);
+            SetScreen(lobbyPanel);
         }
+    }
+
+    public void SetScreen(GameObject screen)
+    {
+        roomPanel.SetActive(false);
+        lobbyPanel.SetActive(false);
+        loginPanel.SetActive(false);
+        screen.SetActive(true);
     }
 
 }

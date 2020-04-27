@@ -1,73 +1,111 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
+using Firebase;
+using Firebase.Database;
+using Firebase.Unity.Editor;
 
 
-public class Storage: MonoBehaviour
+public class Storage : MonoBehaviour
 {
-    public string storageName;
-    [SerializeField] public Dictionary<string, string> dictionary;
+    public Login login;
+    public string userName;
+    public string storedHashedPassword;
+    public string inputHashedPassword;
+    DatabaseReference reference;
+    
 
     public void Start()
     {
-        // load saved dictionary
-        dictionary = new Dictionary<string, string>();
+        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://hideandseek-42a89.firebaseio.com/");
+        reference = FirebaseDatabase.DefaultInstance.RootReference;
+        FirebaseDatabase.DefaultInstance.GetReference("Users").ChildChanged += HandleChildAdded;
     }
 
-    public Storage(string storageName, Dictionary<string, string> dictionary)
-    {
-        this.storageName = storageName;
-        this.dictionary = dictionary;
-    }
 
     // User create account
-    public int createAccount(string username, string password) // username and password obtain from textbox
+    public async Task<int> CreateAccount(string username, string password) // username and password obtain from textbox
     {
-        
-        if (!this.dictionary.ContainsKey(username))
-        {
-            string hashOutput = hashpassword(password);
-            this.dictionary.Add(username, hashOutput);
-            return 0;
-        }
-        else
-        {
-            // Console.WriteLine("Username is taken, please choose another one"); // error display
-            return -1;
-        }
+            string hashOutput = Hashpassword(password);
+            // Debug.Log(reference.Child("Users").Child(username));
+            int result = await reference.Child("Users").Child(username).GetValueAsync().ContinueWith(task => 
+            {               
+                if (task.IsFaulted)
+                {
+                    Debug.Log("error");
+                    return 0;
+                }
+                else if (task.IsCompleted)
+                {
+                    DataSnapshot snapshot = task.Result;
+                    // Do something with snapshot...
+                    if (snapshot == null)
+                    {
+                        Debug.Log("snapshot is null");
+                        return 0;
+                    }
+                    else
+                    {
+                        if (snapshot.HasChild("Password"))
+                        {
+                            Debug.Log("Account exist");
+                            return 0;
+                        }
+                        else
+                        {
+                            Debug.Log("Account not exist");
+                            reference.Child("Users").Child(username).Child("Password").SetValueAsync(hashOutput);
+                            userName = username;
+                            return 1;
+                        }
+                    }
+                }
+                else
+                {
+                    return 0;
+                }
+            });
+        return result;
     }
 
     // User sign in
-    public int SignIn(string username, string password) // username and password obtain from textbox
+    public async Task<int> SignIn(string username, string password) // username and password obtain from textbox
     {
-        if (this.dictionary.ContainsKey(username))
+        inputHashedPassword = Hashpassword(password);
+        int result = await reference.Child("Users").Child(username).GetValueAsync().ContinueWith
+        (task =>
         {
-            string storedHashedPassword = this.dictionary[username];
-            string inputHashedPassword = hashpassword(password);
-            if (storedHashedPassword == inputHashedPassword)
+            DataSnapshot snapshot = task.Result;
+            if (task.IsCompleted && snapshot.HasChild("Password"))
             {
-                // Console.WriteLine("Log in successfully"); // replace with "redirecting to app page"
-                return 1;
+                Debug.Log("Account exist");
+                storedHashedPassword = snapshot.Child("Password").Value.ToString();
+                
+                if (storedHashedPassword == inputHashedPassword) 
+                {
+                    userName = username;
+                    return 1; 
+                }
+                else{ return 0; }
             }
             else
             {
-                // Console.WriteLine("Username or password is incorrect, please try again"); // error display
+                Debug.Log("Account not exist");
                 return -1;
-                
-            }
+            }           
         }
-        else
-        {
-            return 0;
-        }
+        );
+        return result;
     }
 
     // hashing method
-    public string hashpassword(string input)
+    public string Hashpassword(string input)
     {
         using (MD5 md5Hash = MD5.Create())
         {
@@ -82,18 +120,40 @@ public class Storage: MonoBehaviour
             return hash;
         }
     }
-    static void Main(string[] args)
+
+    public async void CreateAndUploadPublicKey() // username and password obtain from textbox
     {
-        Dictionary<string, string> testing = new Dictionary<string, string>();
-        Storage test = new Storage("alex", testing);
-        // create account
-        string username = "alexlin";
-        string password = "alexalex";
-        test.createAccount(username, password);
-        test.createAccount("alexlin", password); // same username
-        // sign in
-        test.SignIn(username, password);
-        test.SignIn(username, "wrongpassword");
+        // Debug.Log(reference.Child("Users").Child(username));
+        string xmlString = Security.CreateKeyPair();
+        Debug.Log("upload " + userName + " \n" + xmlString);
+        await reference.Child("Users").Child(userName).Child("PublicKey").SetValueAsync(xmlString);
     }
+
+    public async Task<string> GetXmlFromUser(string username)
+    {
+        //UpdateReference();
+        string xmlString = await FirebaseDatabase.DefaultInstance.GetReference("Users").GetValueAsync().ContinueWith
+        (task =>
+        {
+            DataSnapshot snapshot = task.Result;
+            string storedPublicKey = snapshot.Child(username).Child("PublicKey").Value.ToString();
+            return storedPublicKey;
+        }
+        );
+        Debug.Log(xmlString);
+        return xmlString;
+    }
+
+    void HandleChildAdded(object sender, ChildChangedEventArgs args)
+    {
+        if (args.DatabaseError != null)
+        {
+            Debug.LogError(args.DatabaseError.Message);
+            return;
+        }
+        // Do something with the data in args.Snapshot
+        Debug.Log("childchange");
+    }
+
 }
 

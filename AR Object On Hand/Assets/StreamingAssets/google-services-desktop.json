@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "76586327489",
+    "firebase_url": "https://hideandseek-42a89.firebaseio.com",
+    "project_id": "hideandseek-42a89",
+    "storage_bucket": "hideandseek-42a89.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76586327489:android:2b236cd951f80e75bae340",
+        "android_client_info": {
+          "package_name": "com.username.hellomano"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "76586327489-a8j67j2o473skrqo5l4ovm6ua132otle.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvaycEZY88mMIcxnDEcbOnj3Zm7VC_eaA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "76586327489-a8j67j2o473skrqo5l4ovm6ua132otle.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "76586327489-s2obakagg13vuq88quisjd5rqf8l4dsq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.username.hellomano"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
