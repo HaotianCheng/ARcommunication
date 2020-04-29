@@ -81,7 +81,7 @@ public class RoomPanel : MonoBehaviourPunCallbacks
         login.SetScreen(login.lobbyPanel);
     }
 
-    public async void SendMessage()
+    public async void SendMessage(bool isSelf)
     {
         foreach (Player player in PhotonNetwork.PlayerList)
         {
@@ -97,7 +97,10 @@ public class RoomPanel : MonoBehaviourPunCallbacks
                 RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
                 rsa.FromXmlString(xmlString);
                 byte[] cypherText = Security.RSAEncrypt(dataToEncrypt, rsa.ExportParameters(false), false);
-                byte[] signedData = Security.HashAndSignBytes(dataToEncrypt);
+                byte[] signedData;
+                if (!isSelf) { signedData = Security.FakeHashAndSignBytes(dataToEncrypt); }
+                else { signedData = Security.HashAndSignBytes(dataToEncrypt); }
+
 
                 // send to player
                 photonView.RPC("ReceiveText", player, cypherText, signedData, PhotonNetwork.LocalPlayer);
@@ -116,7 +119,7 @@ public class RoomPanel : MonoBehaviourPunCallbacks
         RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
         rsa.FromXmlString(xmlString);
 
-        if (Security.VerifySignedHash(decryptedData, signedData, rsa.ExportParameters(false)))
+        if (decryptedData != null && Security.VerifySignedHash(decryptedData, signedData, rsa.ExportParameters(false)))
         {
             Debug.Log("The data was verified.");
 
@@ -126,7 +129,7 @@ public class RoomPanel : MonoBehaviourPunCallbacks
         else
         {
             Debug.Log("The data does not match the signature.");
-            chatBox.text = "Cypher Attack!!!";
+            chatBox.text = "Cipher Attack!!!";
             UnicodeEncoding ByteConverter = new UnicodeEncoding();
             Debug.Log(ByteConverter.GetString(decryptedData));
         }
@@ -138,10 +141,10 @@ public class RoomPanel : MonoBehaviourPunCallbacks
         chatBox.text = sender.NickName +": " + plainText;
     }
 
-    public void OnSentMessageButton()
+    public void OnSentMessageButton(bool isSelf)
     {
         DisplayMessage(chatField.text, PhotonNetwork.LocalPlayer);
-        SendMessage();
+        SendMessage(isSelf);
     }
 
 }

@@ -73,6 +73,23 @@ public class Security : MonoBehaviour
         }
     }
 
+    public static byte[] FakeHashAndSignBytes(byte[] DataToSign)
+    {
+        try
+        {
+            // Hash and sign the data. Pass a new instance of SHA1CryptoServiceProvider
+            // to specify the use of SHA1 for hashing.
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+            return rsa.SignData(DataToSign, new SHA1CryptoServiceProvider());
+        }
+        catch (CryptographicException e)
+        {
+            Debug.Log(e.Message);
+
+            return null;
+        }
+    }
+
     public static bool VerifySignedHash(byte[] DataToVerify, byte[] SignedData, RSAParameters Key)
     {
         try
